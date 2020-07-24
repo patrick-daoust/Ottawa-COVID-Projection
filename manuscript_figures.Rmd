@@ -33,7 +33,7 @@ reduction_shade <- "rgba(243, 213, 86, 0.3)"
 # Generate projection plot
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 source("R/hosp_projections.R")
-projection_plot <- hosp_fun(ott_projections, "hosp_census", title = "Projected COVID-19 hospital census in Ottawa", y = "Census (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 20, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed census of patients")
+projection_plot <- hosp_fun(ott_projections, "hosp_census", title = NULL, y = "Census (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 20, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed census of patients")
 ```
 
 # Export plot as HTML and PDF
