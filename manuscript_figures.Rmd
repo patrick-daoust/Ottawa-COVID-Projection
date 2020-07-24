@@ -1,0 +1,46 @@
+---
+title: "manuscript_figures"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Load libraries
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# libraries
+library(plotly)
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+```
+
+
+# Load data, color objects
+```{r, echo=FALSE}
+# data
+ott_projections <- read.csv(file.path(getwd(), "Data/OPH_projection_estimates.csv"))
+
+# colors
+acute_col <- "rgb(72, 137, 194)"
+acute_shade <- "rgba(72, 137, 194, 0.3)"
+
+reduction_col <- "rgb(243, 213, 86)"
+reduction_shade <- "rgba(243, 213, 86, 0.3)"
+```
+
+# Generate projection plot
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+source("R/hosp_projections.R")
+projection_plot <- hosp_fun(ott_projections, "hosp_census", title = "Projected COVID-19 hospital census in Ottawa", y = "Census (# of patients)", current_color = acute_col, current_shade = acute_shade, reduction_value = 20, reduction_color = reduction_col, reduction_shade = reduction_shade, observed_name = "Observed census of patients")
+```
+
+# Export plot as HTML and PDF
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# HTML export
+htmlwidgets::saveWidget(projection_plot, "census_plot.html")
+
+# PDF export
+orca(projection_plot, "census_plot.pdf")
+```
